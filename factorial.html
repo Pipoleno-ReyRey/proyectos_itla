@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>factorial</h1>
+    <form action="" method="post">
+        <input type="number" id="numero" placeholder="numefo para factorial">
+        <button type="button" id="calcular" onclick="Calcular()">calcular</button>
+    </form>
+    <p id="resultado"></p>
+
+    <script>
+        function Calcular(){
+            let numero = parseInt(document.getElementById("numero").value) 
+            let resultado = 1
+            for(let i = 1; i <= numero; i++){
+                resultado *= i
+            }
+            document.getElementById("resultado").innerHTML = "el factorial de " + numero + " es " + resultado
+        }
+    </script>
+</body>
+</html>

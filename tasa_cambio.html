@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>tasa de cambio</h1>
+    <p>cuantos pesos dominicanos ingresaras</p>
+    <input type="number" id="pesos" placeholder="pesos">
+    <p>a que moneda quieres cambiarla: </p>
+    <button id="dolares" type="button" onclick="Dolares()">dolares</button>
+    <button id="euros" type="button" onclick="Euros()">euros</button>
+    <button id="pesos mexicanos" type="button" onclick="PesosMexicanos()">pesos mexicanos</button>
+    <button id="yenes" type="button" onclick="Yenes()">yenes</button>
+    <p id="cambio"></p>
+
+    <script>
+        
+        function Dolares(){
+            let pesos = document.getElementById("pesos").value
+            let dolares = parseFloat(pesos) * 0.017
+            document.getElementById("cambio").innerHTML = pesos + " pesos dominicanos son " + dolares + " dolares"
+        }   
+
+        function Euros(){
+            let pesos = document.getElementById("pesos").value
+            let euros = parseFloat(pesos) * 0.016
+            document.getElementById("cambio").innerHTML = pesos + " pesos dominicanos son " + euros + " euros"
+        }
+
+        function PesosMexicanos(){
+            let pesos = document.getElementById("pesos").value
+            let pesosMexicanos = parseFloat(pesos) * 0.28
+            document.getElementById("cambio").innerHTML = pesos + " pesos dominicanos son " + pesosMexicanos + " pesos mexicanos"
+        }
+
+        function Yenes(){
+            let pesos = document.getElementById("pesos").value
+            let yenes = parseFloat(pesos) * 2.58
+            document.getElementById("cambio").innerHTML = pesos + " pesos dominicanos son " + yenes + " yenes"
+        }
+    </script>
+</body>
+</html>
