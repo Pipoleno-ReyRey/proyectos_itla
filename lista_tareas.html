@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>lista de tareas</h1>
+    <form action="" method="post">
+        <input type="text" id="tarea_nueva" placeholder="tarea nueva">
+        <button type="button" id="enviar" onclick="AgregarTarea()">agregar</button>
+    </form>
+
+    <ol id="lista">
+
+    </ol>
+    <script>
+        class Tarea{
+            tarea = ""
+            completada = false
+            
+            constructor(tarea){
+                let lista = document.getElementById("lista")
+                let botonBorrar = "<button type\"button\" id=\"borrar\">borrar</button>";
+                this.tarea = tarea
+                lista.innerHTML += "<li>"+this.tarea+"<input type=\"checkbox\" id=\"completada\">"+botonBorrar+"</li>"
+                //this.lista.querySelector("borrar").addEventListener('click', this.Borrar.bind(this))
+
+            }
+
+            Borrar(){
+                this.tarea.parentNode.removeChild(this.tarea)
+            }
+        }
+
+        
+        let tareas = localStorage.getItem("tareas")
+        if(tareas === null){
+            tareas = []
+        } else{
+            tareas = JSON.parse(tareas)
+            tareas.forEach(elemento =>{
+                elemento = new Tarea(elemento.tarea)
+            })
+        }
+        localStorage.setItem("tareas", JSON.stringify(tareas))
+        
+        function AgregarTarea(){
+            if(localStorage.getItem("tareas") !== null){
+                let tareaNueva = document.getElementById("tarea_nueva").value
+                let tareaUnica = new Tarea(tareaNueva)
+                let tareass = JSON.parse(localStorage.getItem("tareas"))
+                tareass.push(tareaUnica)
+                localStorage.setItem("tareas", JSON.stringify(tareass))
+                //lista.innerHTML += "<li>"+tareaUnica.tarea+"</li>";
+            }
+            else {
+                let tareaNueva = document.getElementById("tarea_nueva").value
+                let tareaUnica = new Tarea(tareaNueva)
+                let tareass = []
+                tareass.push(tareaUnica)
+                localStorage.setItem("tareas", JSON.stringify(tareass))
+                tareass.forEach(elemento => {
+                    //lista.innerHTML += "<li>"+elemento.tarea+"</li>"
+                    elemento = new Tarea(elemento.tarea)
+                });
+            }
+        }
+
+    </script>
+</body>
+</html>
