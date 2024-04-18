@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>40 numeros</h1>
+    <ol id="lista de numeros">
+
+    </ol>
+    <h3 id="numero a ingresar">ingresa el numero</h3>
+    <form action="" method="post">
+        <input type="number" id="numero" placeholder="numero">
+        <button type="button" id="comprobar" onclick="Comprobar()">comprobar</button>
+    </form>
+    <p id="resultado"></p>
+    
+    <script>
+        let lista = document.getElementById("lista de numeros")
+        if(localStorage.getItem("listaNumeros") == null){
+            let listaNumeros = []
+            function numRandom(){
+            let minimo = "0000"
+            let maximo = "9999"
+            let numero = Math.floor((Math.random()*(parseInt(maximo)-parseInt(minimo)+1))+parseInt(minimo))
+
+            if(numero < 1000 && numero > 100){
+                numero = "0" + String(numero)
+            } else if(numero < 100){
+                numero = "00" + String(numero)
+            } else if(numero < 10){
+                numero = "000" + String(numero)
+            } else {
+                numero = String(numero)
+            }
+
+            return numero
+        }
+        function AgregarNumero(numero){
+            if(listaNumeros == null){
+                listaNumeros.push(numero)
+            } else{
+            let x = 0
+            let index = 0
+            while(index < listaNumeros.length){
+                if(listaNumeros[index] === numero){
+                    x = 1
+                    break
+                }
+                index++
+            }
+            if(x == 0){
+                listaNumeros.push(numero)
+            }
+        }
+    }
+
+
+    let lista = document.getElementById("lista de numeros")
+    let x = 0
+    while(listaNumeros.length < 40){
+        AgregarNumero(numRandom())
+    }
+    localStorage.setItem("listaNumeros", JSON.stringify(listaNumeros))
+    listaNumeros = JSON.parse(localStorage.getItem("listaNumeros"))
+    listaNumeros.forEach(elemento => {
+        lista.innerHTML += "<li>"+elemento+"</li>"
+    });
+    } else{
+        let listaNumeros = JSON.parse(localStorage.getItem("listaNumeros"))
+        listaNumeros.forEach(elemento => {
+        lista.innerHTML += "<li>"+elemento+"</li>"
+    });
+    }
+        
+    let titulo = document.getElementById("numero a ingresar")
+    let minimo = 1
+    let maximo = 40
+    let numero = Math.floor((Math.random()*(maximo-minimo+1))+minimo)
+    let listaNumeros = JSON.parse(localStorage.getItem("listaNumeros"))
+    titulo.innerHTML += ": "+numero
+    function Comprobar(){
+        let numeroIngresado = document.getElementById("numero").value
+        let resultado = document.getElementById("resultado")
+        if(numeroIngresado == listaNumeros[numero-1]){
+            resultado.innerHTML = "el numero que ingresaste es correcto y valido"
+        } else {
+            resultado.innerHTML = "el numero que ingresaste es erroneo e invalido"
+        }
+    }
+
+    </script>
+</body>
+</html>
